@@ -1,2 +1,52 @@
-package com.accounts;public class SalaryAccount {
+package com.accounts;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
+public class SalaryAccount extends SavingAccount{
+
+    private boolean statusFrozen = false;
+    private LocalDate lastTransectionDate ;
+    private int LimitDays = 61;
+
+    public SalaryAccount(long accountNo, String name, long aadharNo, String address, int pin) {
+        super(accountNo, name, aadharNo, address, pin);
+
+    }
+
+    public boolean isFrozen() {
+        LocalDate currentDate = LocalDate.now();
+        long daysDifference = ChronoUnit.DAYS.between(lastTransectionDate, currentDate);//this function gives different of two day
+        if(daysDifference > LimitDays) {
+            statusFrozen = true ;
+        }
+        return statusFrozen;
+    }
+    public void makeFree() {
+        statusFrozen = false;
+    }
+
+    public void deposit(double amount) {
+        super.deposit(amount);
+        if(!isFrozen()) {
+            lastTransectionDate = LocalDate.now();
+        }else {
+            System.out.println("Your Account has been frozen");
+        }
+    }
+    @Override
+    public void withdraw(double amount) {
+        if(!isFrozen()) {
+            super.setBalance(super.getBalance()-amount);
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            super.statement[count++] = new Statement(false,amount,super.getBalance(),currentDateTime);
+            lastTransectionDate = LocalDate.now();
+            System.out.println("Withdraw Done Successfully");
+        }else {
+            System.out.println("Your Account has been frozen\nYou Cannot withdraw Money");
+        }
+
+    }
+
 }
