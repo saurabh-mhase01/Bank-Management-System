@@ -38,11 +38,13 @@ public class SalaryAccount extends SavingAccount{
     @Override
     public void withdraw(double amount) {
         if(!isFrozen()) {
-            super.setBalance(super.getBalance()-amount);
-            LocalDateTime currentDateTime = LocalDateTime.now();
-            super.statement[count++] = new Statement(false,amount,super.getBalance(),currentDateTime);
-            lastTransectionDate = LocalDate.now();
-            System.out.println("Withdraw Done Successfully");
+            if(super.getBalance()-amount>0) {
+                super.setBalance(super.getBalance() - amount);
+                LocalDateTime currentDateTime = LocalDateTime.now();
+                super.statement[count++] = new Statement(false, amount, super.getBalance(), currentDateTime);
+                lastTransectionDate = LocalDate.now();
+                System.out.println("Withdraw Done Successfully");
+            }else System.out.println("Insufficient Balance to Withdraw");
         }else {
             System.out.println("Your Account has been frozen\nYou Cannot withdraw Money");
         }

@@ -22,11 +22,7 @@ public class Statement {
         String formattedTimestamp = timestamp.format(formatter);
 
         String statementType = type ? "Credit" : "Debit";
-
-        return "Statement Details:\n" +
-                "Type: " + statementType + "\n" +
-                "Amount: " + amount + "\n" +
-                "Available Balance: " + availableBalance + "\n" +
-                "Timestamp: " + formattedTimestamp;
+        String sign = type? "+":"-";
+        return "Type: " + statementType + " " + "Amount: " + sign + amount + " " + "Available Balance: " + availableBalance + " "  + "Timestamp: " + formattedTimestamp;
     }
 }

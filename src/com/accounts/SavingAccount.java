@@ -8,20 +8,23 @@ public class SavingAccount extends Account{
 
     public SavingAccount(long accountNo, String name, long aadharNo, String address, int pin) {
         super(accountNo, name, aadharNo, address, pin);
-        // TODO Auto-generated constructor stub
     }
 
 
     @Override
     public void withdraw(double amount) {
-        if(super.getBalance()-amount>min_balence) {
+        if(super.getBalance()-amount>=min_balence) {
             super.setBalance(super.getBalance()-amount);
             LocalDateTime currentDateTime = LocalDateTime.now();
             super.statement[count++] = new Statement(false,amount,super.getBalance(),currentDateTime);
             System.out.println("Withdraw Done Successfully");
-        }else {
-            System.out.println("You have not sufficient Balence");
-        }
+        }else if(super.getBalance()==min_balence)
+            System.out.println("Cannot Withdraw amount minimum Limit exceeds");
+        else
+            System.out.println("You don't have sufficient Balance to Withdraw");
+
+
+
 
     }
 
