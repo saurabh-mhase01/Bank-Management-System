@@ -124,11 +124,26 @@ public class Main {
 
     private static void otherOptions(Account account) {
         if(account instanceof SalaryAccount){
-
+            SalaryAccount acc = (SalaryAccount)account;
+            System.out.println("1. Account Unfreeze\n2.Setdate for freeze");
+            int choice = sc.nextInt();
+            switch(choice){
+                case 1->{
+                    acc.makeunFreeze();
+                }
+                case 2->{
+                     System.out.println("Enter the date for Freeze in yyy-mm-dd format");
+                     String date = sc.nextLine();
+                     DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MMM-dd");
+                     LocalDate lDate = new LocalDate().parse(date,format);
+                     acc.setlasttransectiondate(lDate);
+                }
+            }
         }
-        if(account instanceof SavingAccount ){
+        // if(account instanceof SavingAccount ){
+            // nofunction to down cast
 
-        }
+        // }
         if(account instanceof LoanAccount ){
 
         }

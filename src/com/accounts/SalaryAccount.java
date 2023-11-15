@@ -19,25 +19,28 @@ public class SalaryAccount extends SavingAccount{
         LocalDate currentDate = LocalDate.now();
         long daysDifference = ChronoUnit.DAYS.between(lastTransectionDate, currentDate);//this function gives different of two day
         if(daysDifference > LimitDays) {
-            statusFrozen = true ;
+            this.statusFrozen = true ;
         }
-        return statusFrozen;
+        return this.statusFrozen;
     }
-    public void makeFree() {
-        statusFrozen = false;
+    public void makeunFreeze() {
+        this.statusFrozen = false;
+    }
+    public setlasttransectiondate(LocalDate date ){
+        this.lastTransectionDate = date;
     }
 
     public void deposit(double amount) {
         super.deposit(amount);
-        if(!isFrozen()) {
-            lastTransectionDate = LocalDate.now();
+        if(isFrozen()==false) {
+            this.lastTransectionDate = LocalDate.now();
         }else {
             System.out.println("Your Account has been frozen");
         }
     }
     @Override
     public void withdraw(double amount) {
-        if(!isFrozen()) {
+        if(isFrozen()==false) {
             if(super.getBalance()-amount>0) {
                 super.setBalance(super.getBalance() - amount);
                 LocalDateTime currentDateTime = LocalDateTime.now();
