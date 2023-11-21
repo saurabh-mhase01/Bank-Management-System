@@ -11,7 +11,7 @@ public class CurrentAccount extends Account {
 
     }
     public double  getOverDraftAmount() {
-        return Math.abs(super.getBalance()+ overDraftAmount);
+        return Math.abs(super.getBalance()- overDraftAmount);
 
     }
     @Override

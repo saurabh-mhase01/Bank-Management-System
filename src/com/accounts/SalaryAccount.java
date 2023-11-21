@@ -26,7 +26,7 @@ public class SalaryAccount extends SavingAccount{
     public void makeunFreeze() {
         this.statusFrozen = false;
     }
-    public setlasttransectiondate(LocalDate date ){
+    public void setlasttransectiondate(LocalDate date ){
         this.lastTransectionDate = date;
     }
 

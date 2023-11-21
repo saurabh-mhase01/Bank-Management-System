@@ -21,6 +21,14 @@ public abstract class Account {
         this.pin = pin;
     }
 
+    public static float getInterestRate() {
+        return interestRate;
+    }
+
+    public static void setInterestRate(float interestRate) {
+        Account.interestRate = interestRate;
+    }
+
     public String getName() {
         return name;
     }

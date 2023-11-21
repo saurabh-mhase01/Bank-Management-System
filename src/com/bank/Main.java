@@ -1,5 +1,7 @@
 package com.bank;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import com.accounts.*;
 
@@ -132,11 +134,13 @@ public class Main {
                     acc.makeunFreeze();
                 }
                 case 2->{
+
                      System.out.println("Enter the date for Freeze in yyy-mm-dd format");
-                     String date = sc.nextLine();
-                     DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MMM-dd");
-                     LocalDate lDate = new LocalDate().parse(date,format);
-                     acc.setlasttransectiondate(lDate);
+                     sc.nextLine();
+                     String inputDate = sc.nextLine();
+                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate localDate = LocalDate.parse(inputDate, inputFormatter);
+                     acc.setlasttransectiondate(localDate);
                 }
             }
         }
@@ -148,7 +152,13 @@ public class Main {
 
         }
         if(account instanceof CurrentAccount){
-
+            CurrentAccount acc = (CurrentAccount)account;
+            System.out.println("1. Get OverDraft Amount ");
+            int choice = 0;
+            choice = sc.nextInt();
+            if(choice ==1){
+                System.out.println("Total Balance to Withdraw "+acc.getOverDraftAmount());
+            }
         }
     }
 
